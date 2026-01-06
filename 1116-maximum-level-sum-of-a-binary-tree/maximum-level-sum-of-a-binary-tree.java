@@ -20,36 +20,24 @@ class Solution {
         }
         Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
-        q.add(null);
         int level =1;
-        int currSum = 0;
         int maxSum = Integer.MIN_VALUE;
-        int maxLevel = 0;
-        while(true){
-            TreeNode curr = q.poll();
-            if(curr == null){
-                if(maxSum<currSum){
-                    maxSum = currSum;
-                    maxLevel = level;
-                }
-                level++;
-                currSum = 0;
-                if(q.isEmpty()){
-                    break;
-                }
-                q.offer(null);
-            }else{
+        int maxLevel = 1;
+        while(!q.isEmpty()){
+            int size = q.size();
+            int currSum = 0;
+            for(int i=0;i<size;i++){
+                TreeNode curr = q.poll();
                 currSum += curr.val;
-                if(curr.left != null){
-                    q.offer(curr.left);
-                }
-                if(curr.right != null){
-                    q.offer(curr.right);
-                }
+                if(curr.left != null) q.offer(curr.left);
+                if(curr.right != null) q.offer(curr.right);
+            }    
+            if(maxSum<currSum){
+                maxSum = currSum;
+                maxLevel = level;
             }
-            
+            level++;
         }
-
         return maxLevel;
     }
 }
