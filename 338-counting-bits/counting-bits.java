@@ -4,17 +4,9 @@ class Solution {
         setBits[0] = 0;
 
         for(int i=1;i<=n;i++){
-            int num = i;
-            int currBit = 0;
-            int bitMask = 1;
-            while(num>0){
-                if((num&1) == 1){
-                    currBit++;
-                }
-                num = num >> 1;
-            }
-            setBits[i] = currBit;
+            setBits[i] = setBits[i>>1] + (i&1);
         }
+
         return setBits;
     }
 }
