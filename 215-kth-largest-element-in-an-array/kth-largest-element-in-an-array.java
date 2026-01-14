@@ -16,7 +16,14 @@ class Solution {
         return pi;
     }
     public int quickSelect(int low,int high,int k,int[] nums){
+        int random = low + (int)(Math.random() * (high-low + 1));
+
+        int temp = nums[random];
+        nums[random] = nums[high];
+        nums[high] = temp;
+
         int pi = partition(low,high,nums);
+
         if(pi == k-1){
             return nums[pi];
         }else if(pi<k-1){
