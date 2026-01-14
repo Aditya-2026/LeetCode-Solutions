@@ -15,24 +15,26 @@ class Solution {
         
         return pi;
     }
-    public int quickSelect(int low,int high,int k,int[] nums){
-        int random = low + (int)(Math.random() * (high-low + 1));
-
-        int temp = nums[random];
-        nums[random] = nums[high];
-        nums[high] = temp;
-
-        int pi = partition(low,high,nums);
-
-        if(pi == k-1){
-            return nums[pi];
-        }else if(pi<k-1){
-            return quickSelect(pi+1,high,k,nums);
-        }else{
-            return quickSelect(low,pi-1,k,nums);
-        }
-    }
     public int findKthLargest(int[] nums, int k) {
-       return quickSelect(0,nums.length-1,k,nums);
+        int low = 0;
+        int high = nums.length-1;
+        while(low<=high){
+            int random = low + (int)(Math.random() * (high-low + 1));
+
+            int temp = nums[random];
+            nums[random] = nums[high];
+            nums[high] = temp;
+
+            int pi = partition(low,high,nums);
+
+            if(pi == k-1){
+                return nums[pi];
+            }else if(pi < k-1){
+                low = pi+1;
+            }else{
+                high = pi-1;
+            }
+        }
+        return -1;
     }
 }
