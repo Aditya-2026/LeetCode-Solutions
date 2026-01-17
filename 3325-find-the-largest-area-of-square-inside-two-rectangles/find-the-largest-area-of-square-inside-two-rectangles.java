@@ -1,7 +1,7 @@
 class Solution {
     public long largestSquareArea(int[][] bottomLeft, int[][] topRight) {
         int n = bottomLeft.length;
-        long maxArea = 0;
+        long maxSide = 0;
 
         for(int i=0;i<n;i++){
             int x1 = bottomLeft[i][0];
@@ -23,12 +23,11 @@ class Solution {
                 if(yOverlap<=0) continue;
                 
                 int side = Math.min(xOverlap,yOverlap);
-                long area = (long)side * side;
 
-                maxArea = Math.max(maxArea,area);
+                maxSide = Math.max(maxSide,side);
             }
         }
 
-        return maxArea;
+        return maxSide * maxSide;
     }
 }
